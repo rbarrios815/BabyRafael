@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A little love for Rafael</title>
+
+  <style>
+    :root {
+      --ink: #254962;
+      --muted: #5a7283;
+      --blue: #dceef9;
+      --pale: #f1f8fc;
+      --line: #d9e6ef;
+      --deep: #315f82;
+      --cream: #fffdf8;
+      --gold: #c2a36b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    button, a, input, select, textarea {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button { cursor: pointer; }
+    button:disabled { cursor: wait; opacity: .65; }
+    a { color: var(--deep); }
+
+    .topbar {
+      max-width: 1160px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 23px 28px;
+      font-size: 13px;
+      letter-spacing: .08em;
+    }
+
+    .brand { font-weight: 750; }
+
+    .topbar a {
+      text-decoration: none;
+      letter-spacing: 0;
+      font-weight: 650;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(155deg, #edf7fc, #dcecf8);
+      text-align: center;
+      padding: 54px 24px 68px;
+      border-top: 1px solid #e2edf3;
+      border-bottom: 1px solid #dbe7ef;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .21em;
+      font-size: 11px;
+      font-weight: 750;
+      margin: 0 0 17px;
+      color: #52748d;
+    }
+
+    .hero h1 {
+      font: normal clamp(48px, 7vw, 80px)/1.08
+        Georgia, "Times New Roman", serif;
+      letter-spacing: -.045em;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 em {
+      font-weight: normal;
+      color: #3e7398;
+    }
+
+    .hero p.lede {
+      max-width: 520px;
+      margin: 23px auto 0;
+      color: #47697f;
+      font-size: 17px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .family {
+      display: inline-block;
+      border: 1px solid #bfd5e5;
+      background: #f7fbfeaa;
+      border-radius: 30px;
+      padding: 8px 20px;
+      margin-top: 25px;
+      font-size: 13px;
+      color: #3c6480;
+    }
+
+    .sky {
+      position: absolute;
+      pointer-events: none;
+      opacity: .85;
+    }
+
+    .sky.left { left: 3%; top: 43px; width: 200px; }
+    .sky.right { right: 4%; bottom: 30px; width: 190px; }
+
+    .stars {
+      color: var(--gold);
+      font-size: 23px;
+      letter-spacing: 12px;
+      margin-bottom: 15px;
+    }
+
+    .wrap {
+      max-width: 1110px;
+      margin: auto;
+      padding: 35px 24px 60px;
+    }
+
+    .welcome {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 31px;
+    }
+
+    .welcome p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 630px;
+      font-size: 14px;
+    }
+
+    .welcome strong { color: var(--ink); }
+
+    .steps {
+      white-space: nowrap;
+      font-size: 12px;
+      letter-spacing: .025em;
+      color: #52748d;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px #23496605;
+    }
+
+    .panel-head { padding: 26px 27px 0; }
+
+    .kicker {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #7a94a6;
+      margin: 0 0 8px;
+    }
+
+    .panel h2 {
+      font: normal 30px/1.2 Georgia, serif;
+      letter-spacing: -.02em;
+      margin: 0 0 10px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .panel-body { padding: 23px 27px 27px; }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field { margin-bottom: 17px; min-width: 0; }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    label span { color: #768b99; font-weight: 400; }
+
+    .field input,
+    .field select,
+    .field textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #cbdce8;
+      border-radius: 10px;
+      background: #fcfeff;
+      color: var(--ink);
+      padding: 11px 12px;
+      min-height: 46px;
+      outline: none;
+    }
+
+    .field textarea { resize: vertical; min-height: 88px; }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #a7cde5;
+      outline-offset: 2px;
+    }
+
+    .hint {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 6px 0 0;
+    }
+
+    .primary {
+      width: 100%;
+      background: var(--deep);
+      color: white;
+      border: 0;
+      border-radius: 11px;
+      padding: 13px 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .primary:hover { background: #244e6e; }
+
+    .footnote {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin: 11px 0 0;
+    }
+
+    .notice {
+      padding: 13px 15px;
+      border-radius: 11px;
+      font-size: 13px;
+      margin: 0 0 18px;
+      white-space: pre-line;
+    }
+
+    .notice.error {
+      background: #fff2ee;
+      color: #904531;
+      border: 1px solid #f0d0c4;
+    }
+
+    .notice.success {
+      background: #edf7f3;
+      color: #28624d;
+      border: 1px solid #c7e6d8;
+    }
+
+    [hidden] { display: none !important; }
+
+    .honeypot {
+      position: absolute;
+      left: -10000px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .schedule-tools {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .count { font-size: 12px; color: var(--muted); }
+
+    .refresh {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 7px 12px;
+      color: var(--deep);
+      font-size: 12px;
+    }
+
+    .empty {
+      border: 1px dashed #c5dbe9;
+      background: var(--pale);
+      border-radius: 15px;
+      text-align: center;
+      padding: 32px 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .empty .symbol {
+      font-size: 31px;
+      color: #88afc8;
+      margin-bottom: 10px;
+    }
+
+    .empty strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .day { margin-bottom: 22px; }
+
+    .day h3 {
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .015em;
+      margin: 0 0 10px;
+      color: #46677f;
+    }
+
+    .entry {
+      border: 1px solid var(--line);
+      border-left: 3px solid #a7c9e0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    .entry-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 6px;
+      background: #eaf4fb;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .entry time { color: var(--muted); font-size: 11px; }
+
+    .entry h4 {
+      font-size: 14px;
+      margin: 2px 0 5px;
+      font-weight: 700;
+    }
+
+    .entry p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 3px 0;
+    }
+
+    .entry .note {
+      padding-top: 8px;
+      border-top: 1px solid #edf2f5;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+
+    .care {
+      margin-top: 20px;
+      padding: 19px 21px;
+      background: #f2f7fa;
+      border-radius: 15px;
+      border: 1px solid #e4edf3;
+    }
+
+    .care h3 {
+      font: normal 20px Georgia, serif;
+      margin: 0 0 10px;
+    }
+
+    .care p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 8px 0;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font: italic 18px Georgia, serif;
+      color: #7b97ac;
+    }
+
+    .footer small {
+      display: block;
+      font: 11px system-ui, sans-serif;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 760px) {
+      .topbar { padding: 18px 20px; }
+      .hero { padding: 45px 20px 46px; }
+
+      .sky.left {
+        left: -63px;
+        top: 20px;
+        width: 150px;
+        opacity: .45;
+      }
+
+      .sky.right {
+        right: -70px;
+        width: 155px;
+        opacity: .45;
+      }
+
+      .hero p.lede { font-size: 15px; max-width: 350px; }
+      .wrap { padding: 25px 16px 40px; }
+      .welcome { display: block; }
+      .steps { margin-top: 14px; }
+      .layout { grid-template-columns: 1fr; gap: 22px; }
+      .panel-head { padding: 23px 21px 0; }
+      .panel-body { padding: 21px; }
+      .hero h1 { font-size: 54px; }
+    }
+
+    @media (max-width: 360px) {
+      .row { grid-template-columns: 1fr; gap: 0; }
+      .hero h1 { font-size: 46px; }
+      .topbar { font-size: 11px; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .primary, .refresh { transition: background .15s ease; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">☁ &nbsp; RAFAEL'S LITTLE VILLAGE</div>
+    <a href="#schedule">View schedule ↓</a>
+  </header>
+
+  <section class="hero">
+    <svg class="sky left" viewBox="0 0 200 180" aria-hidden="true">
+      <path
+        d="M122 13a51 51 0 1 0 36 80 43 43 0 0 1-36-80"
+        fill="#fffdf6"
+      />
+      <path
+        d="M18 135c-20-28 13-51 36-31 1-37 56-41 65-6 36-8 52 38 17 46H28z"
+        fill="#fff"
+      />
+      <path
+        d="m166 16 3 10 10 3-10 3-3 10-3-10-10-3 10-3z"
+        fill="#bda271"
+      />
+    </svg>
+
+    <svg class="sky right" viewBox="0 0 200 150" aria-hidden="true">
+      <path
+        d="M19 92c-16-28 15-47 35-31 5-35 58-36 66-1 33-10 55 35 20 43H29z"
+        fill="#fff"
+      />
+      <path
+        d="m50 10 4 12 13 4-13 4-4 12-4-12-13-4 13-4zm115 100 3 8 9 3-9 3-3 9-3-9-9-3 9-3z"
+        fill="#bda271"
+      />
+    </svg>
+
+    <div class="stars" aria-hidden="true">✧ ⋆ ✧</div>
+    <p class="eyebrow">Little boy. Big love.</p>
+    <h1>A little love<br>for <em>Rafael.</em></h1>
+
+    <p class="lede">
+      Let's surround Kristina, Daniel, and their baby boy with
+      full hearts, warm meals, and a little extra care.
+    </p>
+
+    <div class="family">For Kristina, Daniel &amp; baby Rafael</div>
+  </section>
+
+  <main class="wrap">
+    <div class="welcome">
+      <p>
+        <strong>Every little gesture makes a difference.</strong><br>
+        Choose a day to bring a meal, send a gift card, or share
+        something sweet for baby Rafael.
+      </p>
+
+      <div class="steps">
+        01 &nbsp; Pick a day &nbsp; · &nbsp;
+        02 &nbsp; Choose your gift &nbsp; · &nbsp;
+        03 &nbsp; Send love
+      </div>
+    </div>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="signup-heading">
+        <div class="panel-head">
+          <p class="kicker">A place in their village</p>
+          <h2 id="signup-heading">I'd love to help.</h2>
+          <p class="sub">Add your plans so everyone can coordinate.</p>
+        </div>
+
+        <div class="panel-body">
+          <div
+            id="message"
+            class="notice"
+            role="status"
+            aria-live="polite"
+            tabindex="-1"
+            hidden
+          ></div>
+
+          <form id="signup-form">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input
+                id="name"
+                name="name"
+                maxlength="80"
+                autocomplete="name"
+                placeholder="Name or family name"
+                required
+              >
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="type">I'd like to bring…</label>
+                <select id="type" name="type" required>
+                  <option value="">Choose an option</option>
+                  <option>Breakfast</option>
+                  <option>Lunch</option>
+                  <option>Dinner</option>
+                  <option>Snacks</option>
+                  <option>Gift Card</option>
+                  <option>Baby Gift</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <p
+              id="slot-hint"
+              class="hint"
+              style="margin:-8px 0 17px"
+              aria-live="polite"
+            >
+              Breakfast, lunch, and dinner each have one signup per day.
+            </p>
+
+            <div class="field">
+              <label for="item">What are you bringing?</label>
+              <input
+                id="item"
+                name="item"
+                maxlength="220"
+                placeholder="A homemade meal, diapers, a little surprise…"
+                required
+              >
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="time">
+                  Delivery time <span>· optional</span>
+                </label>
+                <input id="time" name="time" type="time">
+                <p class="hint">Times are Central Time.</p>
+              </div>
+
+              <div class="field" id="amount-field" hidden>
+                <label for="amount">
+                  Gift-card amount <span>· optional</span>
+                </label>
+                <input
+                  id="amount"
+                  name="amount"
+                  type="number"
+                  min="0.01"
+                  max="10000"
+                  step="0.01"
+                  inputmode="decimal"
+                  placeholder="$"
+                >
+                <p class="hint">Visible only to the organizers.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="note">
+                A little note <span>· optional, public</span>
+              </label>
+              <textarea
+                id="note"
+                name="note"
+                maxlength="400"
+                placeholder="Leave a kind message or a note about your delivery."
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="contact">
+                Phone or email <span>· optional, private</span>
+              </label>
+              <input
+                id="contact"
+                name="contact"
+                maxlength="160"
+                placeholder="For the organizers to reach you"
+              >
+              <p class="hint">
+                Your contact details won't appear on the schedule.
+              </p>
+            </div>
+
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Leave this blank</label>
+              <input
+                id="website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              >
+            </div>
+
+            <button
+              id="submit"
+              class="primary"
+              type="submit"
+              disabled
+            >
+              Loading schedule…
+            </button>
+
+            <p class="footnote">
+              Your name and signup details appear on the schedule.<br>
+              This is a commitment only; no payment is collected.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <div>
+        <section
+          class="panel"
+          id="schedule"
+          aria-labelledby="schedule-heading"
+        >
+          <div class="panel-head">
+            <p class="kicker">Love on the calendar</p>
+            <h2 id="schedule-heading">What's on the way</h2>
+            <p class="sub">
+              Upcoming meals, thoughtful gifts, and helping hands.
+            </p>
+          </div>
+
+          <div class="panel-body">
+            <div class="schedule-tools">
+              <span id="count" class="count" aria-live="polite">
+                Loading…
+              </span>
+              <button id="refresh" class="refresh" type="button">
+                ↻ Refresh
+              </button>
+            </div>
+
+            <div
+              id="schedule-message"
+              class="notice error"
+              role="status"
+              hidden
+            ></div>
+
+            <div id="entries" aria-live="polite">
+              <div class="empty">Gathering the latest signups…</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="care">
+          <h3>A little care goes a long way.</h3>
+          <p>
+            Check with the family about allergies and food needs
+            before preparing a meal.
+          </p>
+          <p>
+            Coordinate the delivery address and timing directly.
+            Give the new family space to rest, and arrange visits
+            in advance.
+          </p>
+          <p>
+            Need to change your signup? Contact the organizer so
+            they can update the schedule.
+          </p>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="footer">
+      Tiny hands. A whole village of love.
+      <small>
+        Made with love for Kristina, Daniel &amp; Rafael &nbsp; ✧
+      </small>
+    </footer>
+  </main>
+
+  <script>
+    'use strict';
+
+    const $ = id => document.getElementById(id);
+
+    let signups = [];
+    let ready = false;
+    let busy = false;
+    let requestId = '';
+    let requestSnapshot = '';
+    let loading = false;
+
+    const meals = ['Breakfast', 'Lunch', 'Dinner'];
+
+    function rpc(method, payload) {
+      return new Promise((resolve, reject) => {
+        if (!(window.google && google.script && google.script.run)) {
+          reject(new Error(
+            'Open the deployed web app to load the schedule and sign up.'
+          ));
+          return;
+        }
+
+        const runner = google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(reject);
+
+        if (method === 'getPageData') {
+          runner.getPageData();
+        } else {
+          runner.submitSignup(payload);
+        }
+      });
+    }
+
+    function showMessage(text, kind) {
+      const el = $('message');
+      el.textContent = text;
+      el.className = 'notice ' + kind;
+      el.hidden = false;
+      el.focus();
+    }
+
+    function conflict() {
+      return meals.includes($('type').value) &&
+        signups.some(r =>
+          r.date === $('date').value &&
+          r.type === $('type').value
+        );
+    }
+
+    function updateForm() {
+      const gift = $('type').value === 'Gift Card';
+
+      $('amount-field').hidden = !gift;
+      $('amount').disabled = !gift;
+
+      const taken = conflict();
+
+      $('slot-hint').textContent = taken
+        ? 'That meal is already covered. Please choose another date or type.'
+        : 'Breakfast, lunch, and dinner each have one signup per day.';
+
+      $('submit').disabled = !ready || busy || taken;
+
+      $('submit').textContent = busy
+        ? 'Saving your signup…'
+        : !ready
+          ? 'Schedule unavailable — tap Refresh'
+          : taken
+            ? 'Please choose an open meal slot'
+            : 'Count me in  ♡';
+    }
+
+    function dateLabel(value) {
+      const p = value.split('-').map(Number);
+
+      return new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(new Date(p[0], p[1] - 1, p[2], 12));
+    }
+
+    function timeLabel(value) {
+      if (!value) return 'Time to be arranged';
+
+      const p = value.split(':').map(Number);
+
+      return (p[0] % 12 || 12) + ':' +
+        String(p[1]).padStart(2, '0') +
+        (p[0] < 12 ? ' AM' : ' PM') + ' CT';
+    }
+
+    function node(tag, cls, text) {
+      const el = document.createElement(tag);
+      if (cls) el.className = cls;
+      if (text !== undefined) el.textContent = text;
+      return el;
+    }
+
+    function renderSchedule() {
+      const root = $('entries');
+      root.replaceChildren();
+
+      $('count').textContent = signups.length +
+        (signups.length === 1
+          ? ' upcoming signup'
+          : ' upcoming signups');
+
+      if (!signups.length) {
+        const empty = node('div', 'empty');
+
+        empty.append(
+          node('div', 'symbol', '☁'),
+          node('strong', '', 'Be the first to send a little love.'),
+          node(
+            'span',
+            '',
+            'The calendar is open. Pick a day and help welcome baby Rafael.'
+          )
+        );
+
+        root.append(empty);
+        return;
+      }
+
+      let lastDate = '';
+      let group;
+
+      signups.forEach(r => {
+        if (r.date !== lastDate) {
+          group = node('section', 'day');
+          group.append(node('h3', '', dateLabel(r.date)));
+          root.append(group);
+          lastDate = r.date;
+        }
+
+        const card = node('article', 'entry');
+        const top = node('div', 'entry-top');
+
+        top.append(
+          node('span', 'badge', r.type),
+          node('time', '', timeLabel(r.time))
+        );
+
+        card.append(
+          top,
+          node('h4', '', r.item),
+          node('p', '', 'From ' + r.name)
+        );
+
+        if (r.note) {
+          card.append(node('p', 'note', r.note));
+        }
+
+        group.append(card);
+      });
+    }
+
+    async function loadSchedule() {
+      if (loading) return;
+
+      loading = true;
+      $('refresh').disabled = true;
+
+      try {
+        const data = await rpc('getPageData');
+
+        signups = data.signups;
+        $('date').min = data.today;
+
+        const selected = $('type').value;
+
+        $('type').replaceChildren(
+          new Option('Choose an option', '')
+        );
+
+        data.types.forEach(t => {
+          $('type').add(new Option(t, t));
+        });
+
+        $('type').value = selected;
+
+        ready = true;
+        $('schedule-message').hidden = true;
+        renderSchedule();
+      } catch (err) {
+        ready = false;
+
+        $('schedule-message').textContent =
+          'Could not refresh the schedule. ' +
+          (err.message || 'Please try again.');
+
+        $('schedule-message').hidden = false;
+
+        if (!signups.length) {
+          $('count').textContent = 'Schedule unavailable';
+          $('entries').replaceChildren();
+        } else {
+          $('count').textContent = 'Showing the last loaded schedule';
+        }
+      } finally {
+        loading = false;
+        $('refresh').disabled = false;
+        updateForm();
+      }
+    }
+
+    function newId() {
+      return window.crypto && crypto.randomUUID
+        ? crypto.randomUUID()
+        : 'signup_' +
+          Date.now().toString(36) + '_' +
+          Math.random().toString(36).slice(2) +
+          Math.random().toString(36).slice(2);
+    }
+
+    $('type').addEventListener('change', updateForm);
+    $('date').addEventListener('change', updateForm);
+    $('refresh').addEventListener('click', loadSchedule);
+
+    $('signup-form').addEventListener('submit', async event => {
+      event.preventDefault();
+
+      if (
+        busy ||
+        !ready ||
+        conflict() ||
+        !event.target.reportValidity()
+      ) {
+        return;
+      }
+
+      const payload = Object.fromEntries(
+        new FormData(event.target).entries()
+      );
+
+      if (payload.type !== 'Gift Card') {
+        payload.amount = '';
+      }
+
+      const snapshot = JSON.stringify(payload);
+
+      if (!requestId || requestSnapshot !== snapshot) {
+        requestId = newId();
+        requestSnapshot = snapshot;
+      }
+
+      payload.requestId = requestId;
+
+      busy = true;
+      updateForm();
+      $('message').hidden = true;
+
+      const controls = [
+        ...event.target.querySelectorAll('input,select,textarea')
+      ];
+
+      controls.forEach(c => c.disabled = true);
+
+      try {
+        const result = await rpc('submitSignup', payload);
+
+        if (!result || !result.ok) {
+          throw new Error(
+            'The signup could not be confirmed. Please try again.'
+          );
+        }
+
+        event.target.reset();
+        requestId = '';
+        requestSnapshot = '';
+
+        showMessage(
+          'You’re on the calendar! Thank you for showing Kristina, ' +
+          'Daniel, and baby Rafael some love. Please coordinate ' +
+          'delivery directly with the family.',
+          'success'
+        );
+
+        await loadSchedule();
+      } catch (err) {
+        showMessage(
+          err.message ||
+          'Unable to confirm your signup. Please retry; an unchanged ' +
+          'retry will not create a duplicate.',
+          'error'
+        );
+
+        await loadSchedule();
+      } finally {
+        controls.forEach(c => c.disabled = false);
+        busy = false;
+        updateForm();
+      }
+    });
+
+    loadSchedule();
+  </script>
+</body>
+</html>
