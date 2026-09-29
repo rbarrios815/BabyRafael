@@ -156,6 +156,47 @@
       color: #52748d;
     }
 
+    .favorites {
+      margin-bottom: 28px;
+      padding: 24px 27px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--pale);
+    }
+
+    .favorites h2 {
+      font: normal 25px/1.2 Georgia, serif;
+      margin: 0 0 18px;
+    }
+
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px 28px;
+    }
+
+    .favorites h3 {
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+
+    .favorites ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .favorites li {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 1.03fr) minmax(0, 1fr);
@@ -447,6 +488,8 @@
       .wrap { padding: 25px 16px 40px; }
       .welcome { display: block; }
       .steps { margin-top: 14px; }
+      .favorites { padding: 21px; }
+      .favorites-grid { grid-template-columns: 1fr; }
       .layout { grid-template-columns: 1fr; gap: 22px; }
       .panel-head { padding: 23px 21px 0; }
       .panel-body { padding: 21px; }
@@ -523,6 +566,30 @@
         03 &nbsp; Send love
       </div>
     </div>
+
+    <section class="favorites" aria-labelledby="favorites-heading">
+      <h2 id="favorites-heading">A few family favorites</h2>
+      <div class="favorites-grid">
+        <div>
+          <h3>Gift-card ideas</h3>
+          <ul role="list">
+            <li>H-E-B</li>
+            <li>Uber Eats</li>
+            <li>DoorDash</li>
+            <li>Starbucks</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Restaurants they enjoy</h3>
+          <ul role="list">
+            <li>El Tiempo</li>
+            <li>Terry Black’s BBQ</li>
+            <li>Pho Ben</li>
+            <li>Niko Niko</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <div class="layout">
       <section class="panel" aria-labelledby="signup-heading">
